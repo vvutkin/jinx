@@ -502,7 +502,7 @@ position."
                   (while (and (< word-start word-end)
                               (let ((c (char-after word-start)))
                                 (or (= c ?') (= c ?’))))
-                    (incf word-start))
+                    (cl-incf word-start))
                   (while (and (< word-start word-end)
                               (let ((c (char-before word-end)))
                                 (or (= c ?') (= c ?’))))
@@ -1015,7 +1015,7 @@ misspelled words, but do not open the correction UI."
          (if-let* (((overlay-buffer ov))
                    (skip (jinx--correct-overlay ov :info (format " (%d of %d)" (1+ idx) count))))
              (setq idx (mod (+ idx skip) count))
-           (incf idx)))))))
+           (cl-incf idx)))))))
 
 ;;;###autoload
 (defun jinx-correct-nearest ()
@@ -1031,7 +1031,7 @@ misspelled words, but do not open the correction UI."
                 (if (overlay-buffer ov)
                     (when-let* ((skip (jinx--correct-overlay ov)))
                       (setq idx (mod (+ idx skip) count)))
-                  (incf idx)))))))) ;; Skip deleted overlay
+                  (cl-incf idx)))))))) ;; Skip deleted overlay
 
 ;;;###autoload
 (defun jinx-correct-word (&optional start end initial)
@@ -1094,7 +1094,7 @@ This command dispatches to the following commands:
         (throw 'jinx--goto n)
       (let ((ov (jinx--force-overlays (point-min) (point-max))))
         (unless (or (> n 0) (<= (overlay-start (car ov)) (point) (overlay-end (car ov))))
-          (incf n))
+          (cl-incf n))
         (goto-char (overlay-end (nth (mod n (length ov)) ov)))
         (jinx--invisible-open-permanently)))))
 
