@@ -506,7 +506,7 @@ position."
                   (while (and (< word-start word-end)
                               (let ((c (char-before word-end)))
                                 (or (= c ?') (= c ?’))))
-                    (decf word-end))
+                    (cl-decf word-end))
                   (while (< word-start word-end)
                     (let ((subword-end word-end))
                       (when jinx--camel
